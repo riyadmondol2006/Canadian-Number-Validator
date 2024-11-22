@@ -47,12 +47,16 @@
    Open your browser and go to:
    ```
    http://localhost:5000
-   ```
+![ScreenShot Tool -20241122185909](https://github.com/user-attachments/assets/11ffdbe4-d163-4540-9bab-a2112056dfbd)
 
 3. **Upload and Validate**:
    - Upload your Excel file containing phone numbers.
    - View validation results directly in the interface.
    - Download a detailed report (`validation_report.xlsx`).
+  ![ScreenShot Tool -20241122190052](https://github.com/user-attachments/assets/1818c4ea-e170-42c3-83e7-e12587b33f26)
+
+     
+![image](https://github.com/user-attachments/assets/71aa7d72-3608-4852-98b0-bf2a870652c0)
 
 
 ## Contributing
