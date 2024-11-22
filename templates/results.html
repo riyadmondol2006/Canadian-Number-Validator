@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Processing Results - Canadian Phone Number Validator</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+</head>
+<body class="bg-gray-50 min-h-screen">
+    <div class="container mx-auto px-4 py-12">
+        <!-- Header -->
+        <div class="text-center mb-12">
+            <h1 class="text-4xl font-bold text-gray-800 mb-4">Processing Results</h1>
+            <p class="text-gray-600">Your file has been processed successfully.</p>
+        </div>
+
+        <!-- Results Card -->
+        <div class="max-w-2xl mx-auto bg-white rounded-xl shadow-md overflow-hidden">
+            <div class="p-8">
+                <!-- Success Message -->
+                <div class="text-center mb-8">
+                    <div class="mx-auto flex items-center justify-center h-12 w-12 rounded-full bg-green-100 mb-4">
+                        <svg class="h-6 w-6 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/>
+                        </svg>
+                    </div>
+                    <h2 class="text-2xl font-medium text-gray-900 mb-2">Processing Complete</h2>
+                    <p class="text-gray-600">Your phone numbers have been validated and organized by province.</p>
+                </div>
+
+                <!-- Download Section -->
+                <div class="space-y-6">
+                    <!-- Main Download Button -->
+                    <div class="text-center">
+                        <a href="{{ download_url }}" 
+                           class="inline-flex items-center px-6 py-3 border border-transparent text-base font-medium rounded-md shadow-sm text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500">
+                            <svg class="mr-2 h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"/>
+                            </svg>
+                            Download All Province Files (ZIP)
+                        </a>
+                    </div>
+
+                    {% if stats %}
+                    <!-- Statistics -->
+                    <div class="border-t border-gray-200 pt-6">
+                        <h3 class="text-lg font-medium text-gray-900 mb-4">Processing Statistics</h3>
+                        <div class="grid grid-cols-2 gap-4">
+                            <div class="bg-gray-50 rounded-lg p-4">
+                                <p class="text-sm text-gray-500">Total Numbers</p>
+                                <p class="text-2xl font-semibold text-gray-900">{{ stats.total_numbers }}</p>
+                            </div>
+                            <div class="bg-gray-50 rounded-lg p-4">
+                                <p class="text-sm text-gray-500">Valid Numbers</p>
+                                <p class="text-2xl font-semibold text-green-600">{{ stats.valid_numbers }}</p>
+                            </div>
+                            <div class="bg-gray-50 rounded-lg p-4">
+                                <p class="text-sm text-gray-500">Invalid Numbers</p>
+                                <p class="text-2xl font-semibold text-red-600">{{ stats.invalid_numbers }}</p>
+                            </div>
+                            <div class="bg-gray-50 rounded-lg p-4">
+                                <p class="text-sm text-gray-500">Success Rate</p>
+                                <p class="text-2xl font-semibold text-blue-600">
+                                    {{ "%.1f"|format(stats.valid_numbers/stats.total_numbers*100) }}%
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                    {% endif %}
+                </div>
+
+                <!-- Process Another File Link -->
+                <div class="mt-8 text-center">
+                    <a href="{{ url_for('index') }}" 
+                       class="inline-flex items-center text-blue-600 hover:text-blue-500">
+                        <svg class="mr-2 h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 17l-5-5m0 0l5-5m-5 5h12"/>
+                        </svg>
+                        Process another file
+                    </a>
+                </div>
+            </div>
+        </div>
+
+<!-- Notes -->
+<div class="mt-8 text-center text-sm text-gray-500">
+    <p>Files will be automatically deleted after 24 hours for security purposes.</p>
+    <p>Need help? Contact support for assistance.</p>
+</div>
+</div>
+
+<!-- Loading Overlay (Hidden by default) -->
+<div id="loadingOverlay" class="fixed inset-0 bg-gray-600 bg-opacity-50 hidden flex items-center justify-center">
+<div class="bg-white p-6 rounded-lg shadow-xl">
+    <div class="animate-spin rounded-full h-10 w-10 border-b-2 border-blue-600 mx-auto"></div>
+    <p class="mt-4 text-gray-700">Processing your file...</p>
+</div>
+</div>
+
+<script>
+// Show loading overlay when downloading
+document.querySelectorAll('a[href*="download"]').forEach(link => {
+    link.addEventListener('click', () => {
+        const overlay = document.getElementById('loadingOverlay');
+        overlay.classList.remove('hidden');
+        setTimeout(() => {
+            overlay.classList.add('hidden');
+        }, 2000); // Hide after 2 seconds
+    });
+});
+</script>
+</body>
+</html>
