@@ -1,4 +1,3 @@
-os
 io
 shutil
 numpy
