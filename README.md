@@ -54,22 +54,6 @@
    - View validation results directly in the interface.
    - Download a detailed report (`validation_report.xlsx`).
 
----
-
-## Directory Structure
-```
-canadian-number-validator/
-    ├── phone-validator-webapp.py   # Starts the web server and handles validation logic
-    ├── requirements.txt            # Dependencies list
-    ├── README.md                   # Documentation
-    ├── templates/                  # HTML templates for the web UI
-    ├── static/                     # Static assets (CSS, JS, images)
-    ├── utils.py                    # Helper functions
-    ├── example.xlsx                # Example input file
-    ├── validation_report.xlsx      # Example output report (generated dynamically)
-```
-
----
 
 ## Contributing
 Contributions are welcome! Feel free to:
